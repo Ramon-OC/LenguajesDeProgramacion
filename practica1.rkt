@@ -2,7 +2,7 @@
    Práctica Uno
    Integrantes:
      -
-     -
+     - Rojo Mata Daniel
      - Ortiz Castañeda José Ramón [318357115]
 |#
 

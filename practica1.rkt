@@ -8,6 +8,22 @@
 
 #lang plai
 
+
+;; Ejercicio 1
+;; area_total: Real Real -> Real
+;; Calcula el área total de un cono circular recto.
+;; La fórmula utilizada es A = πrg + πr^2, donde r es el radio de la base
+;; y g es la generatriz de la base.
+(define (area-total diametro generatriz)
+  ;; radio: -> Real
+  ;; Calcula y devuelve el radio a partir del diámetro.
+  (define (radio)
+    (/ diametro 2))
+
+  ;; Calcula el área total utilizando la fórmula A = πrg + πr^2.
+  (+ (* pi (radio) generatriz) (* pi (sqr (radio)))))
+
+
 #|
  Ejercicio Cuatro
    Definir la función primer-letra la cual recibe una string, (cuyos elementos deben ser letras minúsculas),
@@ -50,3 +66,30 @@
 |#
 (define (impar? n)
   (equal? (remainder n 2) 1))
+
+
+;; Ejercicio 8
+;; Definición de la función calculadora que realiza operaciones específicas según el argumento "operacion".
+(define (calculadora operacion num1 num2)
+  ;; Se utiliza cond para evaluar diferentes casos y realizar la operación correspondiente.
+  (cond
+    ;; Caso: "first". Devuelve el primer número.
+    [(equal? operacion "first") num1]
+    ;; Caso: "second". Devuelve el segundo número.
+    [(equal? operacion "second") num2]
+    ;; Caso: "sum". Devuelve la suma de los dos números.
+    [(equal? operacion "sum") (+ num1 num2)]
+    ;; Caso: "mul". Devuelve la multiplicación de los dos números.
+    [(equal? operacion "mul") (* num1 num2)]
+    ;; Caso: "div-exact". Devuelve el resultado de la división exacta si el divisor no es cero, de lo contrario, devuelve un mensaje de error.
+    [(equal? operacion "div-exact")
+     (if (not (= num2 0))
+         (quotient num1 num2)
+         "Error: División entre cero")]
+    ;; Caso: "div". Devuelve el resultado de la división si el divisor no es cero, de lo contrario, devuelve un mensaje de error.
+    [(equal? operacion "div")
+     (if (not (= num2 0))
+         (/ num1 num2)
+         "Error: División entre cero")]
+    ;; Caso por defecto: Si la operación no es reconocida, devuelve un mensaje de error.
+    [else "Error: Operación no válida"]))

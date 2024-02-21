@@ -2,7 +2,7 @@
    Práctica Uno
    Integrantes:
      - Ocampo Tovar Fernando [317144451]
-     - Rojo Mata Daniel
+     - Rojo Mata Daniel [314297967] 
      - Ortiz Castañeda José Ramón [318357115]
 
 |#

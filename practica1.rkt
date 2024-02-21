@@ -1,9 +1,10 @@
 #|
    Práctica Uno
    Integrantes:
-     -
+     - Ocampo Tovar Fernando [317144451]
      - Rojo Mata Daniel
      - Ortiz Castañeda José Ramón [318357115]
+
 |#
 
 #lang plai
@@ -22,6 +23,31 @@
 
   ;; Calcula el área total utilizando la fórmula A = πrg + πr^2.
   (+ (* pi (radio) generatriz) (* pi (sqr (radio)))))
+
+
+#|
+Ejercicio 2
+Función decremental?, dados 4 números a, b, c y d, decidir si se encuentran en orden descenente.
+Solo hay un caso donde se cumpla, que a sea mayor que b, b mayor que c y c mayor que d.
+Por eso se ocupa un if que verifica que se cumplan las desigualdades y de ahí se obtiene la respuesta.
+|#
+(define (decremental? a b c d)
+  (if (and (>= a b) (>= b c) (>= c d))
+      true
+      false))
+
+#|
+Ejercicio 3
+Función area-heron, dados 3 lados de un triángulo, cálucla su área con la fórmula de Herón
+Dado que S es la suma de los 3 lados dividida entre 2, se ocupa una función auxiliar que realiza a operación
+para facilitar la redacción.
+La operación prinicipal es una raíz cuadrada por eso es lo primero que aparece y despúes las otras multiplicaciones
+|#
+(define (area-heron a b c)
+  (sqrt (* (auxese a b c) (*(- (auxese a b c) a)(*(- (auxese a b c) b)(- (auxese a b c) c))))))
+;;Función auxiliar para area-heron
+(define (auxese a b c)
+  (/ (+ a (+ b c)) 2))
 
 
 #|
@@ -66,6 +92,21 @@
 |#
 (define (impar? n)
   (equal? (remainder n 2) 1))
+
+#|
+Ejercicio 7
+Función en-rango-o-fuera, función que te dice si el primer número es mayor que el segundo y menor que el tercero, o si el primero es
+menor que el segundo - 10 o mayor al tercero + 10.
+Se puede ver una condición prinicpal que es que el primero es mayor al segundo y menor al tercero, si esto se cumple regresa true,
+si no, pasa a otro if que analiza las condiciones de ser menor que el segundo - 10 o mayor que el tercero + 10, si se cumple una u otr
+regresa true, si no es false.
+|#
+(define (en-rango-o-fuera? a b c)
+  (if (and (>= a b) (<= a c)) true
+      (if(or (<= (+ a 10) b) (>= a (+ c 10)))
+         true
+         false)))
+           
 
 
 ;; Ejercicio 8

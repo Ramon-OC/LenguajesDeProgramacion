@@ -1,26 +1,73 @@
 #lang plai
 #|
-Practica 2.
+   Práctica Dos
+   Integrantes:
+     - Ocampo Tovar Fernando [317144451]
+     - Rojo Mata Daniel [314297967] 
+     - Ortiz Castañeda José Ramón [318357115]
+
 |#
 
 ;; Ejercicio 1
+;; La función mapea aplica la función func a cada elemento de la lista ls.
 (define (mapea func ls)
-  (error "Sin implementar"))
+  ;; Se utiliza cond para manejar casos específicos de la lista.
+  (cond
+    ; Si la lista es vacía, se devuelve una lista vacía.
+    [(empty? ls) empty] 
+    [else
+     ;; Se utiliza cons para construir una nueva lista aplicando func al primer elemento
+     ;; y recursivamente llamando a mapea para el resto de la lista.
+     (cons (func (car ls)) (mapea func (cdr ls)))]
+  )
+)
+
+
 
 ;; Ejercicio 2
 (define (get-by-index index ls)
   (error "Sin implementar"))
 
+
+
 ;; Ejercicio 3
-;; Define el tipo Figura aquí.
+;; Definición del tipo Figura que incluye dos variantes: cuadrado y círculo.
+;; Un cuadrado se caracteriza por su lado, y un círculo por su diámetro.
+(define-type Figura
+  [cuadrado (lado number?)]
+  [circulo (diametro number?)])
+
+
 
 ;; Ejercicio 4
+;; Calcula el área de una figura, ya sea cuadrado o círculo.
 (define (area figura)
-  (error "Sin implementar"))
+  ;; Comprueba si la figura es del tipo Figura
+  (if (Figura? figura)
+      (type-case Figura figura
+        ;; Área del cuadrado
+        [cuadrado (cuadrado-lado) (expt cuadrado-lado 2)]
+        ;; Área del círculo
+        [circulo (circulo-diametro) (* pi (expt (/ circulo-diametro 2) 2))])
+      ;; Error si no es una figura válida
+      (error "No se recibió un tipo Figura"))) 
+
+
 
 ;; Ejercicio 5
+;; Calcula el perímetro de una figura, ya sea cuadrado o círculo.
 (define (perimetro figura)
-  (error "Sin implementar"))
+   ;; Comprueba si la figura es del tipo Figura
+  (if (Figura? figura)
+      (type-case Figura figura
+        ;; Perímetro del cuadrado
+        [cuadrado (cuadrado-lado) (* cuadrado-lado 4)]
+        ; Perímetro del círculo
+        [circulo (circulo-diametro) (* pi circulo-diametro)])
+      ; Error si no es una figura válida
+      (error "No se recibió un tipo Figura")))
+
+
 
 ;; Ejercicio 6
 (define-type ArbolDeBusqueda

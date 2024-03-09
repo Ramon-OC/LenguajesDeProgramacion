@@ -24,10 +24,25 @@
 
 
 
-;; Ejercicio 2
+;;Ejercicio 2
+;;Función que dado un ínidice regresa el elemento en dicha posición
+;;Se comprueba que sea un índice válido para proceder con la función
+;;Se empieza a contar desde el 0
+;;Se llama recursivamente a la función hasta que el indice sea 0 y regresar la cabeza de la lista restante
 (define (get-by-index index ls)
-  (error "Sin implementar"))
+  (cond
+    [(or (>= index (long ls)) (< index 0)) "Indice inválido"]
+    [(equal? index 0) (car ls)]
+    [else
+     (get-by-index (- index 1) (cdr ls))]))
 
+;;Función auxliar para el ejercicio 2
+;;Se cuenta el número de elementos en la lista
+(define (long ls)
+  (cond
+    [(empty? ls) 0]
+    [else
+     (+ 1 (long (cdr ls)))]))
 
 
 ;; Ejercicio 3
@@ -106,9 +121,19 @@
     [(nodo _ _ der) (maximo der)]))
 
 
-;; Ejercicio 6b
+;;Ejercicio 6.b
+;;Función que nos dice si un elemento está o no en el árbol
+;;Se analiza el caso de ser un árbol vacío y se marca como falso en caso de serlo
+;;Se checa que el valor del elemento sea mayor o menor al nodo raíz para saber por cuál camino ir
+;;Se detiene hasta que el elemento sea igual a la raíz o no se encuentre
 (define (contiene? ar el)
-  (error "Sin implementar"))
+  (type-case ArbolDeBusqueda ar
+    [vacio () false]
+    [nodo (elemento izq der)
+     (cond
+       [(eq? elemento el) true]
+       [(< el elemento) (contiene? izq el)]
+       [(> el elemento) (contiene? der el)])]))
 
 ;; Ejercicio 6c
 ;; Función filtrar-arbol, recibe un árbol binario de búsqueda y un predicado, y devuelve un árbol que contiene

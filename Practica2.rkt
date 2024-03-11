@@ -149,3 +149,9 @@
            (unir new-izq new-der)))]))
 
 ;; PUNTO EXTRA
+
+;; De las dos fragmentos de código, el que termina su ejecución más rápido es el que está escrito en Racket. 
+;; Vemos que ambos hacen uso de la recursión como estructura de control principal para el cálculo de Fibonnaci.
+;; Racket cuenta con un sistema de optimización de cola de llamadas que puede transformar recursiones no finales
+;; en iteraciones eficientes, por otro lado Python debido a la sobrecarga asociada con la recursión, es menos 
+;; eficiente en términos de rendimiento (se crea una pila por cada llamada recursiva).

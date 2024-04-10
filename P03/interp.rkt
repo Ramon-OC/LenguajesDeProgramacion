@@ -86,12 +86,12 @@
                    (not x)
                    (error 'interp "El valor de not tiene que ser del tipo bool")))]
     [with (id valor cuerpo) (let ([aid (interp id)]) ;; Se regresa la evaluación o error en caso de no usar un identificador correcto
-                              (if (id? aid)
+                              (if (symbol? aid)
                                   (interp (subst id (interp valor) cuerpo))
                                   (error "No es un identificador")))]
                             
     [op (f izq der) (let([val (interp izq)]) (let ([val1 (interp der)]) ;; Se realiza la operación indicada y se checa que sean números
-                      (if(and (num? val) (num val1))
+                      (if(and (number? val) (number? val1))
                          (f (interp izq) (interp der))
                            (error "No es número"))))]
     [with* (bindings cuerpo) (interp (with*->with bindings cuerpo))])) ;;Se regresa la asignación de cada uno de los withs

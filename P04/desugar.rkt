@@ -18,21 +18,43 @@
     [iFS (c t e) ((desugar c) (desugar t) (desugar e))]
     [conDS (con els) (desugar-conds con els)]))
 
-(define (desugar-conds conds else)
-  (if (empty? conds)
-      empty
-      (iF (desugar (car conds)) (desugar-conds (cdr conds) else) (desugar else))))
+(define (desugar-operation oper arg)
+  (make-op (desugar oper) (map desugar arg)))
 
-(define (desugar-withs bind body)
-  (app (fun(map desugar (id-take bind)) (desugar body)) (map desugar (val-take bind))))
 
-(define (id-take lis)
-  (if (empty? lis)
-      empty
-      (cons (car (car lis))(id-take (cdr lis)))))
+(define (desugar-with bind body)
+  (let ([ids (map car bind)])
+    (if (contains-duplicates? ids)
+        (error "Nombres de variables duplicados en el enlace")
+        (withS (map (lambda (b) (make-binding (car b) (desugar (cdr b)))) bind)
+               (desugar body)))))
 
-(define (val-take lis)
-  (if (empty? lis)
-      empty
-      (cons (cdr (car lis)) (val-take (cdr lis)))))
+
+(define (desugar-with-star bind body)
+  (let ([ids (map car bind)])
+    (if (contains-duplicates? ids)
+        (error "Nombres de variables duplicados en el enlace")
+        (with*S (map (lambda (b) (make-binding (car b) (desugar (cdr b)))) bind)
+                (desugar body)))))
+
+
+(define (contains-duplicates? lst)
+  (not (= (length lst) (length (remove-duplicates lst)))))
+
+(define (desugar-function ids body)
+  (fun (map desugar ids) (desugar body)))
+
+(define (desugar-application f args)
+  (app (desugar f) (map desugar args)))
+
+(define (desugar-if c t e)
+  (iF (desugar c) (desugar t) (desugar e)))
+
+(define (desugar-cond con els)
+  (if (empty? con)
+      (desugar els)
+      (iF (desugar (caar con))
+          (desugar (cadar con))
+          (desugar-cond (cdr con) els))))
+
 

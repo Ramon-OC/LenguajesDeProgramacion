@@ -80,6 +80,7 @@
 
 (test (prueba '{{fun {} "Hola"}}) (strV "Hola"))
 
+
 ;; Verificar estructura del if {if <expr> <expr> <expr>}
 (test/exn (prueba '{if}) "")
 

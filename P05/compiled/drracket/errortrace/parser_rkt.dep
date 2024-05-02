@@ -1,1 +1,0 @@
-("8.11.1" tarm64osx ("bf350d4fe5e82fa87bc75f0c42d13bff59e7d1c2" . "7cbc06adf094a99b7bf11534afba4300ec122d68") #"/Users/joseramonortizcastaneda/Desktop/LenguajesDeProgramacion/P05/grammars.rkt" (collects #"drracket" #"private" #"drracket-errortrace-key.rkt") (collects #"plai" #"lang" #"reader.rkt") (collects #"plai" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
